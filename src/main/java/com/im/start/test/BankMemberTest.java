@@ -28,6 +28,7 @@ public class BankMemberTest {
 				System.out.println(bankMembersDTO.getEmail());
 				System.out.println(bankMembersDTO.getPhone());
 			}
+			
 			//int result = bankBookMembersDAO.setJoin(bankMembersDTO);
 			//if(result > 0) {
 				//System.out.println("성공");
