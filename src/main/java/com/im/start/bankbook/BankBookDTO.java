@@ -1,14 +1,14 @@
 package com.im.start.bankbook;
 
 public class BankBookDTO {
-	private int bookNum;
+	private long bookNum;
 	private String bookName;
 	private double bookRate;
 	private int bookSale;
-	public int getBookNum() {
+	public long getBookNum() {
 		return bookNum;
 	}
-	public void setBookNum(int bookNum) {
+	public void setBookNum(long bookNum) {
 		this.bookNum = bookNum;
 	}
 	public String getBookName() {

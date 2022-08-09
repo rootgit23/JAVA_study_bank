@@ -14,15 +14,15 @@ public class BankBookDAO implements BookDAO {
 	public ArrayList<BankBookDTO> getList() throws Exception {
 		ArrayList<BankBookDTO> ar = new ArrayList<BankBookDTO>();
 		Connection con = DBConnector.getConnection();
-		String sql = "SELECT * FROM BANK_BOOK ORDER BY BOOK_NUM DESC";
+		String sql = "SELECT * FROM BANKBOOK ORDER BY BOOKNUM DESC";
 		PreparedStatement st = con.prepareStatement(sql);
 		ResultSet rs = st.executeQuery();
 		while(rs.next()) {
 			BankBookDTO bankBookDTO = new BankBookDTO();
-			bankBookDTO.setBookNum(rs.getInt("BOOK_NUM"));
-			bankBookDTO.setBookName(rs.getString("BOOK_NAME"));
-			bankBookDTO.setBookRate(rs.getDouble("BOOK_RATE"));
-			bankBookDTO.setBookSale(rs.getInt("BOOK_SALE"));
+			bankBookDTO.setBookNum(rs.getLong("BOOKNUM"));
+			bankBookDTO.setBookName(rs.getString("BOOKNAME"));
+			bankBookDTO.setBookRate(rs.getDouble("BOOKRATE"));
+			bankBookDTO.setBookSale(rs.getInt("BOOKSALE"));
 			ar.add(bankBookDTO);
 		}
 		DBConnector.disConnection(rs, st, con);
@@ -32,16 +32,16 @@ public class BankBookDAO implements BookDAO {
 	@Override
 	public BankBookDTO getDetail(BankBookDTO bankBookDTO) throws Exception {
 		Connection con = DBConnector.getConnection();
-		String sql = "SELECT * FROM BANK_BOOK WHERE BOOK_NUM = ?";
+		String sql = "SELECT * FROM BANKBOOK WHERE BOOKNUM = ?";
 		PreparedStatement st = con.prepareStatement(sql);
-		st.setInt(1, bankBookDTO.getBookNum());
+		st.setLong(1, bankBookDTO.getBookNum());
 		ResultSet rs = st.executeQuery();
 		if(rs.next()) {
 			bankBookDTO = new BankBookDTO();
-			bankBookDTO.setBookNum(rs.getInt("BOOK_NUM"));
-			bankBookDTO.setBookName(rs.getString("BOOK_NAME"));
-			bankBookDTO.setBookRate(rs.getDouble("BOOK_RATE"));
-			bankBookDTO.setBookSale(rs.getInt("BOOK_SALE"));
+			bankBookDTO.setBookNum(rs.getLong("BOOKNUM"));
+			bankBookDTO.setBookName(rs.getString("BOOKNAME"));
+			bankBookDTO.setBookRate(rs.getDouble("BOOKRATE"));
+			bankBookDTO.setBookSale(rs.getInt("BOOKSALE"));
 		}
 		else
 			return null;
@@ -55,9 +55,9 @@ public class BankBookDAO implements BookDAO {
 		long time = cal.getTimeInMillis();
 		int num = (int)time;
 		Connection con = DBConnector.getConnection();
-		String sql = "INSERT INTO BANK_BOOK VALUES(?,?,?,?)";
+		String sql = "INSERT INTO BANKBOOK VALUES(?,?,?,?)";
 		PreparedStatement st = con.prepareStatement(sql);
-		st.setInt(1,bankBookDTO.getBookNum());
+		st.setLong(1,bankBookDTO.getBookNum());
 		st.setString(2, bankBookDTO.getBookName());
 		st.setDouble(3, bankBookDTO.getBookRate());
 		st.setInt(4, bankBookDTO.getBookSale());
@@ -69,9 +69,9 @@ public class BankBookDAO implements BookDAO {
 	@Override
 	public int setChangeSale(BankBookDTO bankBookDTO) throws Exception {
 		Connection con = DBConnector.getConnection();
-		String sql = "UPDATE BANK_BOOK SET BOOK_SALE = 0 WHERE BOOK_NUM = ?";
+		String sql = "UPDATE BANKBOOK SET BOOKSALE = 0 WHERE BOOKNUM = ?";
 		PreparedStatement st = con.prepareStatement(sql);
-		st.setInt(1, bankBookDTO.getBookNum());
+		st.setLong(1, bankBookDTO.getBookNum());
 		int result = st.executeUpdate();
 		DBConnector.disConnection(st, con);
 		return result;
