@@ -12,7 +12,7 @@ public class BankBookMembersDAO implements MembersDAO{
 	public int setJoin(BankMembersDTO bankMembersDTO) throws Exception {
 		// TODO Auto-generated method stub
 		Connection con = DBConnector.getConnection();
-		String sql = "INSERT INTO BANKMEMBERS VALUES(?,?,?,?,?)";
+		String sql = "INSERT INTO BANK_MEMBERS VALUES(?,?,?,?,?)";
 		PreparedStatement st = con.prepareStatement(sql);
 		st.setString(1, bankMembersDTO.getUser_name());
 		st.setString(2, bankMembersDTO.getPassword());
@@ -30,14 +30,14 @@ public class BankBookMembersDAO implements MembersDAO{
 		BankMembersDTO bankMemberDTO = null;
 		ArrayList<BankMembersDTO> ar = new ArrayList<BankMembersDTO>();
 		Connection con = DBConnector.getConnection();
-		String sql = "SELECT * FROM BANKMEMBERS WHERE ID LIKE ? ORDER BY ID ASC";
+		String sql = "SELECT * FROM BANK_MEMBERS WHERE USER_NAME LIKE ? ORDER BY USER_NAME ASC";
 		PreparedStatement st = con.prepareStatement(sql);
 		st.setString(1, "%" + search + "%");
 		ResultSet rs = st.executeQuery();
 		while(rs.next()) {
 			bankMemberDTO = new BankMembersDTO();
-			String id = rs.getString("ID");
-			String pw = rs.getString("PW");
+			String id = rs.getString("USER_NAME");
+			String pw = rs.getString("PASSWORD");
 			String name = rs.getString("NAME");
 			String email = rs.getString("EMAIL");
 			String phone = rs.getString("PHONE");

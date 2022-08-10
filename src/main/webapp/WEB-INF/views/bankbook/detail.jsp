@@ -27,14 +27,15 @@
 					<td><%if (bankBookDTO.getBookSale() == 1) {%>
 					판매중
 					<%} else{ %>
-					<%} %>
 					판매금지
+					<%} %>
 					</td>
 				</tr>
 			</tbody>
 	</table>
 	<a href="../member/Login">login</a>
 	<a href="/member/join">join</a>
+	<a href="./list">리스트보기</a>
 
 </body>
 </html>

@@ -9,7 +9,7 @@
 <body>
 	<h1>Login Page</h1>
 	<h1>로그인</h1>
-    <form action="./Login" method="post">
+    <form action="login" method="post">
         ID를 입력하세요 : <input type="text" name="id">
         <p>
         비밀번호를 입력하세요 : <input type="password" name="pw">

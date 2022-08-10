@@ -33,7 +33,6 @@
 			<%} %>
 		</tbody>
 	</table>
-	<!-- /bankbook/list -->
-	<a href="./detail">detail</a>
+	<a href="./add">상품등록</a>
 </body>
 </html>

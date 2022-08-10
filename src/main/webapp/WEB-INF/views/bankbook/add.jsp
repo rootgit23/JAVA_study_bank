@@ -9,13 +9,13 @@
 <body>
 	<h1>통장 등록</h1>
 	<form action="add" method="post">
-	BookNum : <input type="number" name="booknum">
+	BookNum : <input type="number" name="bookNum">
 	<p>
-	BookName : <input type="text" name="bookname">
+	BookName : <input type="text" name="bookName">
 	</p>
-	BookRate : <input type="number" name = "bookrate">
+	BookRate : <input type="number" name = "bookRate">
 	<p>
-	BookSale : <input type="number" name = "booksale">
+	BookSale : <input type="number" name = "bookSale">
 	</p>
 	<input type="submit" value="통장등록">
 	</form>
