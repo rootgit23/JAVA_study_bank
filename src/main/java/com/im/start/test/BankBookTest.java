@@ -15,6 +15,22 @@ public class BankBookTest {
 		long time = ca.getTimeInMillis();
 		int num = (int)time;
 		try {
+			bankBookDTO.setBookNum(232);
+			int result = bankBookDAO.setDelete(bankBookDTO);
+			if(result == 1) {
+				System.out.println("성공");
+			}
+			else
+				System.out.println("실패");
+			//bankBookDTO.setBookName("국민");
+			//bankBookDTO.setBookRate(3.12);
+			//bankBookDTO.setBookNum(1653307142);
+			//int result = bankBookDAO.setUpdate(bankBookDTO);
+			//if(result == 1) {
+				//System.out.println("성공");
+			//}
+			//else
+				//System.out.println("실패");
 			//bankBookDTO.setBookNum(1);
 			//int result = bankBookDAO.setChangeSale(bankBookDTO);
 			//if(result > 0) {
@@ -45,16 +61,16 @@ public class BankBookTest {
 			//}
 			
 			
-			bankBookDTO.setBookNum(1);
-			bankBookDTO = bankBookDAO.getDetail(bankBookDTO);
-			if(bankBookDTO != null) {
-				System.out.println(bankBookDTO.getBookNum());
-				System.out.println(bankBookDTO.getBookName());
-				System.out.println(bankBookDTO.getBookRate());
-				System.out.println(bankBookDTO.getBookSale());
-			}
-			else
-				System.out.println("찾는 번호가 없습니다");
+			//bankBookDTO.setBookNum(1);
+			//bankBookDTO = bankBookDAO.getDetail(bankBookDTO);
+			//if(bankBookDTO != null) {
+				//System.out.println(bankBookDTO.getBookNum());
+				//System.out.println(bankBookDTO.getBookName());
+				//System.out.println(bankBookDTO.getBookRate());
+				//System.out.println(bankBookDTO.getBookSale());
+			//}
+			//else
+				//System.out.println("찾는 번호가 없습니다");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
