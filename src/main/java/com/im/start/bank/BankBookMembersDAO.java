@@ -8,6 +8,26 @@ import java.util.ArrayList;
 import com.im.start.util.DBConnector;
 
 public class BankBookMembersDAO implements MembersDAO{
+	
+	public BankMembersDTO getLogin(BankMembersDTO bankMembersDTO) throws Exception{
+		Connection con = DBConnector.getConnection();
+		String sql = "SELECT USER_NAME,NAME FROM BANK_MEMBERS WHERE USER_NAME = ? AND PASSWORD = ?";
+		PreparedStatement st = con.prepareStatement(sql);
+		st.setString(1, bankMembersDTO.getUser_name());
+		st.setString(2, bankMembersDTO.getPassword());
+		ResultSet rs = st.executeQuery();
+		if(rs.next()) {
+			bankMembersDTO = new BankMembersDTO();
+			bankMembersDTO.setUser_name(rs.getString("USER_NAME"));
+			bankMembersDTO.setName(rs.getString("NAME"));
+		}
+		else
+			bankMembersDTO = null;
+		DBConnector.disConnection(rs, st, con);
+		return bankMembersDTO;
+		
+	}
+	
 	@Override
 	public int setJoin(BankMembersDTO bankMembersDTO) throws Exception {
 		// TODO Auto-generated method stub

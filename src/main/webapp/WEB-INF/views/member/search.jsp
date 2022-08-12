@@ -8,7 +8,7 @@
 </head>
 <body>
 	<h1>Search</h1>
-	<form action="search" method = "post">
+	<form action="search.file" method = "post">
 		검색할 ID를 입력 : <input type="text" name="search">
 		<input type="submit" value="검색">
 	</form>

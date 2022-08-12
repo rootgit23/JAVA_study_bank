@@ -1,14 +1,6 @@
-<%@page import="com.im.start.bankbook.BankBookDTO"%>
-<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
-	//스크립블릿 <% java Code작성 % >
-	//표현식    <% 자바변수 또는 값% >
-	ArrayList<BankBookDTO> ar = (ArrayList<BankBookDTO>)request.getAttribute("list");
-	
-	
-%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,15 +16,15 @@
 			</tr>
 		</thead>
 		<tbody>
-			<% for(BankBookDTO bankBookDTO : ar){ %>
+			<c:forEach items="${list }" var = "dto">
 				<tr>
-					<td><a href="./detail?bookNum=<%=bankBookDTO.getBookNum()%>"><%= bankBookDTO.getBookName() %></a></td>
-					<td><%= bankBookDTO.getBookRate() %></td>
+					<td><a href="./detail.file?bookNum=${pageScope.dto.bookNum}">${pageScope.dto.bookName }</a></td>
+					<td>${pageScope.dto.bookRate }</td>
 				</tr>
 			
-			<%} %>
+			</c:forEach>
 		</tbody>
 	</table>
-	<a href="./add">상품등록</a>
+	<a href="./add.file">상품등록</a>
 </body>
 </html>

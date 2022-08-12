@@ -3,6 +3,7 @@ package com.im.start.bank;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,28 +21,38 @@ public class MemberController {
 	// @ : 설명+실행
 	
 	// /member/Login
-	@RequestMapping(value = "login", method = RequestMethod.GET)
+	@RequestMapping(value = "login.file", method = RequestMethod.GET)
 	public String login() {
 		System.out.println("로그인 실행");
 		return "/member/login";
 	}
 	
-	@RequestMapping(value = "login", method = RequestMethod.POST)
-	public String login(BankMembersDTO bankMembersDTO) {
+	@RequestMapping(value = "login.file", method = RequestMethod.POST)
+	public String login(HttpSession session, BankMembersDTO bankMembersDTO, Model model) throws Exception {
 		System.out.println("DB에 로그인 실행");
+		BankBookMembersDAO bankBookMembersDAO = new BankBookMembersDAO();
+		bankMembersDTO = bankBookMembersDAO.getLogin(bankMembersDTO);
+		System.out.println(bankMembersDTO);
+		session.setAttribute("member", bankMembersDTO);
 		// "redirect:다시 접속할 URL(절대경로,상대경로)"
 		return "redirect:../";
 	}
 	
+	@RequestMapping(value = "logout.file" , method = RequestMethod.GET)
+	public String logout(HttpSession session) throws Exception{
+		session.invalidate();
+		return "redirect:../";
+	}
+	
 	//Get
-	@RequestMapping(value = "join", method = RequestMethod.GET)
+	@RequestMapping(value = "join.file", method = RequestMethod.GET)
 	public String join() {
 		System.out.println("조인 Get 실행");
 		return "/member/join";
 	}
 	
 	//Post
-	@RequestMapping(value = "join", method = RequestMethod.POST)
+	@RequestMapping(value = "join.file", method = RequestMethod.POST)
 	public String join(String USER_NAME,String PASSWORD,String NAME, String EMAIL, String PHONE) throws Exception {
 		BankBookMembersDAO bankBookMembersDAO = new BankBookMembersDAO();
 		BankMembersDTO bankMembersDTO = new BankMembersDTO();
@@ -61,15 +72,15 @@ public class MemberController {
 		
 		//로그인폼 페이지로 이동
 		//redirect
-		return "redirect:./login";
+		return "redirect:./login.file";
 	}
 	
-	@RequestMapping(value = "search", method = RequestMethod.GET)
+	@RequestMapping(value = "search.file", method = RequestMethod.GET)
 	public void getSearchByID() throws Exception {
 		System.out.println("search GET 실행");
 	}
 	
-	@RequestMapping(value = "search", method = RequestMethod.POST)
+	@RequestMapping(value = "search.file", method = RequestMethod.POST)
 	public String getSearchByID(ArrayList<BankMembersDTO> ar,String search,Model model) throws Exception {
 		BankBookMembersDAO bankBookMembersDAO = new BankBookMembersDAO();
 		System.out.println("search Post 실행");

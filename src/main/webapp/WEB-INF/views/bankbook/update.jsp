@@ -8,7 +8,7 @@
 </head>
 <body>
 	<h1>Update</h1>
-	<form action="update" method="post">
+	<form action="update.file" method="post">
 		<input type="hidden" name="bookNum" readonly="readonly" value=${detail.bookNum }>
 		<div>
 			Name : <input type="text" name="bookName" value=${detail.bookName }>

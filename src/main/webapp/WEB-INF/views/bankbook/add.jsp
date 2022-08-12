@@ -8,7 +8,7 @@
 </head>
 <body>
 	<h1>통장 등록</h1>
-	<form action="add" method="post">
+	<form action="add.file" method="post">
 	BookNum : <input type="number" name="bookNum">
 	<p>
 	BookName : <input type="text" name="bookName">

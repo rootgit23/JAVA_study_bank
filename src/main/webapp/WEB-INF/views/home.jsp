@@ -14,20 +14,20 @@
 
 <c:if test="${ empty member}">
 
-<a href="/member/login">Login</a>
-<a href="/member/join">Join</a>
+<a href="/member/login.file">Login</a>
+<a href="/member/join.file">Join</a>
 </c:if>
 
 <c:if test="${ not empty member }">
-<a href="#">LogOut</a>
+<h3>${member.name } 님 환영합니다</h3>
+<a href="./member/logout.file">LogOut</a>
 <a href="#">MyPage</a>
 </c:if>
 
-<a href="/bankbook/list">상품리스트</a>
-<a href="/bankbook/detail?bookNum=1659507945370">Detail</a>
-<a href="/bankbook/add">Add</a>
-<a href="/member/search">검색</a>
-<a href="/bankbook/update">업데이트</a>
+<a href="/bankbook/list.file">상품리스트</a>
+<a href="/bankbook/add.file">Add</a>
+<a href="/member/search.file">검색</a>
+<a href="/bankbook/update.file">업데이트</a>
 
 </body>
 </html>

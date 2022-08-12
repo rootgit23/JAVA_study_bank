@@ -9,7 +9,7 @@
 <body>
 	<h1>Join Page</h1>
     <h1>회원가입</h1>
-    <form action="join" method="post">
+    <form action="join.file" method="post">
         ID를 입력하세요 : <input type="text" name="USER_NAME">
         <p>
         비밀번호를 입력하세요 : <input type="password" name="PASSWORD">
