@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,19 +16,20 @@ import com.im.start.bank.BankMembersDTO;
 @RequestMapping("/board/*")
 public class BoardController {
 	
+	@Autowired
+	private BoardService boardService;
+	
 	@RequestMapping(value = "list.file", method = RequestMethod.GET)
 	public void list(Model model) throws Exception{
 		System.out.println("list GET 실행");
-		BoardDAO boardDAO = new BoardDAO();
-		ArrayList<BoardDTO> ar = boardDAO.getList();
+		ArrayList<BoardDTO> ar = boardService.getList();
 		model.addAttribute("list", ar);
 	}
 	
 	@RequestMapping(value = "detail.file", method = RequestMethod.GET)
 	public String detail(Model model,BoardDTO boardDTO) throws Exception{
 		System.out.println("detail GET 실행");
-		BoardDAO boardDAO = new BoardDAO();
-		boardDTO =  boardDAO.getDetail(boardDTO);
+		boardDTO =  boardService.getDetail(boardDTO);
 		model.addAttribute("detail", boardDTO);
 		return "/board/detail";
 	}
@@ -44,12 +46,11 @@ public class BoardController {
 	@RequestMapping(value = "add.file", method = RequestMethod.POST)
 	public String add(BoardDTO boardDTO , HttpSession session) throws Exception{
 		System.out.println("add POST 실행");
-		BoardDAO boardDAO = new BoardDAO();
 		BankMembersDTO bankMembersDTO = (BankMembersDTO)session.getAttribute("member");
 		boardDTO.setTitle(boardDTO.getTitle());
 		boardDTO.setContent(boardDTO.getContent());
 		boardDTO.setUserName(bankMembersDTO.getUser_name());
-		int result = boardDAO.setAdd(boardDTO);
+		int result = boardService.setAdd(boardDTO);
 		if(result == 1) {
 			System.out.println("성공");
 		}
@@ -61,19 +62,17 @@ public class BoardController {
 	@RequestMapping(value = "update.file", method = RequestMethod.GET)
 	public void update(BoardDTO boardDTO, Model model) throws Exception{
 		System.out.println("update GET 실행");
-		BoardDAO boardDAO = new BoardDAO();
-		boardDTO =  boardDAO.getDetail(boardDTO);
+		boardDTO =  boardService.getDetail(boardDTO);
 		model.addAttribute("detail", boardDTO);
 	}
 	
 	@RequestMapping(value = "update.file", method = RequestMethod.POST)
 	public String update(BoardDTO boardDTO) throws Exception{
 		System.out.println("update POST 실행");
-		BoardDAO boardDAO = new BoardDAO();
 		boardDTO.setTitle(boardDTO.getTitle());
 		boardDTO.setContent(boardDTO.getContent());
 		boardDTO.setNum(boardDTO.getNum());
-		int result = boardDAO.setUpdate(boardDTO);
+		int result = boardService.setUpdate(boardDTO);
 		if(result == 1) {
 			System.out.println("성공");
 		}
@@ -85,9 +84,8 @@ public class BoardController {
 	@RequestMapping(value = "delete.file", method = RequestMethod.GET)
 	public String delete(BoardDTO boardDTO) throws Exception{
 		System.out.println("delete GET 실행");
-		BoardDAO boardDAO = new BoardDAO();
 		boardDTO.setNum(boardDTO.getNum());
-		int result = boardDAO.setDelete(boardDTO);
+		int result = boardService.setDelete(boardDTO);
 		if(result == 1) {
 			System.out.println("성공");
 		}
