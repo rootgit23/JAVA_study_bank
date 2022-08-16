@@ -28,6 +28,7 @@
 <a href="/bankbook/add.file">Add</a>
 <a href="/member/search.file">검색</a>
 <a href="/bankbook/update.file">업데이트</a>
+<a href="/board/list.file">글 목록보기</a>
 
 </body>
 </html>
