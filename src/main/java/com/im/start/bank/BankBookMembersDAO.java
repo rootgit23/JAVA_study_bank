@@ -42,29 +42,8 @@ public class BankBookMembersDAO implements MembersDAO{
 	
 	@Override
 	public ArrayList<BankMembersDTO> getSearchByID(String search) throws Exception {
-		// TODO Auto-generated method stub
-		BankMembersDTO bankMemberDTO = null;
-		ArrayList<BankMembersDTO> ar = new ArrayList<BankMembersDTO>();
-		Connection con = DBConnector.getConnection();
-		String sql = "SELECT * FROM BANK_MEMBERS WHERE USER_NAME LIKE ? ORDER BY USER_NAME ASC";
-		PreparedStatement st = con.prepareStatement(sql);
-		st.setString(1, "%" + search + "%");
-		ResultSet rs = st.executeQuery();
-		while(rs.next()) {
-			bankMemberDTO = new BankMembersDTO();
-			String id = rs.getString("USER_NAME");
-			String pw = rs.getString("PASSWORD");
-			String name = rs.getString("NAME");
-			String email = rs.getString("EMAIL");
-			String phone = rs.getString("PHONE");
-			bankMemberDTO.setUser_name(id);
-			bankMemberDTO.setPassword(pw);
-			bankMemberDTO.setName(name);
-			bankMemberDTO.setEmail(email);
-			bankMemberDTO.setPhone(phone);
-			ar.add(bankMemberDTO);
-		}
-		return ar;
+		search = "%" + search + "%";
+		return (ArrayList)sqlSession.selectList(NAMESPACE+"getSearchByID",search);
 	}
 
 }

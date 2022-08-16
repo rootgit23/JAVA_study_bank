@@ -10,6 +10,6 @@
 		SELECT USER_NAME,NAME FROM BANK_MEMBERS WHERE USER_NAME = #{user_name} AND PASSWORD = #{password}
 	</select>
 	<select id="getSearchByID" parameterType="String" resultType = "com.im.start.bank.BankMembersDTO">
-		SELECT * FROM BANK_MEMBERS WHERE USER_NAME LIKE ? ORDER BY USER_NAME ASC
+		SELECT * FROM BANK_MEMBERS WHERE USER_NAME LIKE #{search} ORDER BY USER_NAME ASC
 	</select>
 </mapper>
