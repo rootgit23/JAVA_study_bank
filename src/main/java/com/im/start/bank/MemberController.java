@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,9 @@ import org.springframework.web.servlet.ModelAndView;
 // 이 클래스는 Controller역할, requestmapping에 들어가는 value값 url은 무조권 절대경로 이여야함
 //Container에게 이 클래스의 객체를 생성 위임
 public class MemberController {
+	
+	@Autowired
+	private BankMembersService bankMembersService;
 	
 	// annotation
 	// @ : 설명+실행
@@ -30,8 +34,7 @@ public class MemberController {
 	@RequestMapping(value = "login.file", method = RequestMethod.POST)
 	public String login(HttpSession session, BankMembersDTO bankMembersDTO, Model model) throws Exception {
 		System.out.println("DB에 로그인 실행");
-		BankBookMembersDAO bankBookMembersDAO = new BankBookMembersDAO();
-		bankMembersDTO = bankBookMembersDAO.getLogin(bankMembersDTO);
+		bankMembersDTO = bankMembersService.getLogin(bankMembersDTO);
 		System.out.println(bankMembersDTO);
 		session.setAttribute("member", bankMembersDTO);
 		// "redirect:다시 접속할 URL(절대경로,상대경로)"
@@ -54,14 +57,13 @@ public class MemberController {
 	//Post
 	@RequestMapping(value = "join.file", method = RequestMethod.POST)
 	public String join(String USER_NAME,String PASSWORD,String NAME, String EMAIL, String PHONE) throws Exception {
-		BankBookMembersDAO bankBookMembersDAO = new BankBookMembersDAO();
 		BankMembersDTO bankMembersDTO = new BankMembersDTO();
 		bankMembersDTO.setUser_name(USER_NAME);
 		bankMembersDTO.setPassword(PASSWORD);
 		bankMembersDTO.setName(NAME);
 		bankMembersDTO.setEmail(EMAIL);
 		bankMembersDTO.setPhone(PHONE);
-		int result = bankBookMembersDAO.setJoin(bankMembersDTO);
+		int result = bankMembersService.setJoin(bankMembersDTO);
 		if(result == 1) {
 			System.out.println("성공");
 		}
@@ -82,9 +84,8 @@ public class MemberController {
 	
 	@RequestMapping(value = "search.file", method = RequestMethod.POST)
 	public String getSearchByID(ArrayList<BankMembersDTO> ar,String search,Model model) throws Exception {
-		BankBookMembersDAO bankBookMembersDAO = new BankBookMembersDAO();
 		System.out.println("search Post 실행");
-		ar = bankBookMembersDAO.getSearchByID(search);
+		ar = bankMembersService.getSearchByID(search);
 		model.addAttribute("list", ar);
 		return "member/list";
 	}
