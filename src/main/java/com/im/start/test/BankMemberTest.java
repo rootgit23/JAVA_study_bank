@@ -2,6 +2,7 @@ package com.im.start.test;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.im.start.bank.BankBookMembersDAO;
 import com.im.start.bank.BankMembersDTO;
@@ -12,7 +13,7 @@ public class BankMemberTest {
 	public static void main(String[] args) {
 		BankMembersDTO bankMembersDTO = new BankMembersDTO();
 		BankBookMembersDAO bankBookMembersDAO = new BankBookMembersDAO();
-		ArrayList<BankMembersDTO> ar = new ArrayList<BankMembersDTO>();
+		List<BankMembersDTO> ar = new ArrayList<BankMembersDTO>();
 		//bankMembersDTO.setUser_name("B");
 		//bankMembersDTO.setPassword("b");
 		//bankMembersDTO.setName("비");

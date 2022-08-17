@@ -1,6 +1,6 @@
 package com.im.start.bank;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,7 @@ public class BankMembersService {
 		return bankBookMembersDAO.setJoin(bankMembersDTO);
 	}
 	
-	public ArrayList<BankMembersDTO> getSearchByID(String search) throws Exception {
+	public List<BankMembersDTO> getSearchByID(String search) throws Exception {
 		return bankBookMembersDAO.getSearchByID(search);
 	}
 }
